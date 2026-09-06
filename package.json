@@ -1,5 +1,6 @@
 {
 	"devDependencies": {
+		"@cypress/grep": "^7.0.0",
 		"cypress": "^16.0.0",
 		"cypress-mochawesome-reporter": "^5.0.0",
 		"mochawesome": "^8.0.1",
@@ -13,7 +14,9 @@
 	"scripts": {
 		"cy:open": "cypress open",
 		"cy:run": "cypress run --browser chrome",
-		"test": "cypress run --browser chrome"
+		"test": "cypress run --browser chrome",
+		"test:smoke": "cypress run --browser chrome --expose grepTags=\"@smoke\",grepFilterSpecs=true,grepOmitFiltered=true",
+		"test:regression": "cypress run --browser chrome"
 	},
 	"repository": {
 		"type": "git",

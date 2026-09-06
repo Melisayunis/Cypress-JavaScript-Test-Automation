@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Cypress CI
 
 on:
   push:
@@ -9,8 +9,26 @@ on:
     branches:
       - main
 
+  schedule:
+    - cron: '0 13 * * 1'
+
+  workflow_dispatch:
+  inputs:
+    suite:
+      description: 'Test suite to execute'
+      required: true
+      default: 'smoke'
+      type: choice
+      options:
+        - smoke
+        - regression
+
 jobs:
-  cypress-run:
+  smoke-tests:
+    if: >
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'workflow_dispatch' && inputs.suite == 'smoke')
+
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +39,88 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Cypress tests
-        run: npx cypress run
+      - name: Run smoke tests
+        run: npm run test:smoke
+
+      - name: Upload smoke report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-report
+          path: cypress/reports
+          if-no-files-found: ignore
+
+      - name: Upload smoke screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
+
+      - name: Upload smoke videos
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-videos
+          path: cypress/videos
+          if-no-files-found: ignore
+
+  regression-tests:
+    if: >
+      github.event_name == 'push' ||
+      github.event_name == 'schedule' ||
+      (github.event_name == 'workflow_dispatch' && inputs.suite == 'regression')
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        browser:
+          - chrome
+          - firefox
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run regression tests
+        run: npx cypress run --browser ${{ matrix.browser }}
+
+      - name: Upload regression report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-report-${{ matrix.browser }}
+          path: cypress/reports
+          if-no-files-found: ignore
+
+      - name: Upload regression screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-screenshots-${{ matrix.browser }}
+          path: cypress/screenshots
+          if-no-files-found: ignore
+
+      - name: Upload regression videos
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-videos-${{ matrix.browser }}
+          path: cypress/videos
+          if-no-files-found: ignore

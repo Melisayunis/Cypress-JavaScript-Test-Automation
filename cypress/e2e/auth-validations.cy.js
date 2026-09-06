@@ -21,7 +21,7 @@ describe('Login Validations', () => {
 
     context('Valid Login', () => {
 
-        it('Verify that the user can login with typing valid credentials: Standard User', function() {
+        it('Verify that the user can login with typing valid credentials: Standard User', { tags: ['@smoke', '@auth'] }, () => {
 
             AuthPage.getCredential(standardUser).then(({ username, password }) => {
                 AuthPage.typeUsernameField(username);
@@ -32,7 +32,7 @@ describe('Login Validations', () => {
             });
         });
 
-        it('Verify that the user can login with typing valid credentials: Admin User', function() {
+        it('Verify that the user can login with typing valid credentials: Admin User', { tags: ['@smoke', '@auth'] }, () => {
 
             AuthPage.getCredential(adminUser).then(({ username, password }) => {
                 AuthPage.typeUsernameField(username);
@@ -43,7 +43,7 @@ describe('Login Validations', () => {
             });
         });
 
-        it('Verify that the user can login with Clicking Valid Credentials: Standard User', function() {
+        it('Verify that the user can login with Clicking Valid Credentials: Standard User', { tags: ['@auth'] }, () => {
 
             AuthPage.getCredential(standardUser).then(({ username, password }) => {
                 AuthPage.clickStandardUserCredential();
@@ -53,7 +53,7 @@ describe('Login Validations', () => {
             });
         });
 
-        it('Verify that the user can login with Clicking Valid Credentials: Admin User', function() {
+        it('Verify that the user can login with Clicking Valid Credentials: Admin User', { tags: ['@auth'] }, () => {
 
             AuthPage.getCredential(adminUser).then(({ username, password }) => {
                 AuthPage.clickAdminUserCredential();
@@ -67,7 +67,7 @@ describe('Login Validations', () => {
 
     context('Invalid Login', () => {
 
-        it('Verify that the user cannot login with a Locked User', function() {
+        it('Verify that the user cannot login with a Locked User', { tags: ['@smoke', '@auth'] }, () => {
 
             AuthPage.getCredential(lockedUser).then(({ username, password }) => {
                 AuthPage.typeUsernameField(username);
@@ -78,7 +78,7 @@ describe('Login Validations', () => {
             });
         });
 
-        it('Verify that the user cannot login with Empty Username', function() {
+        it('Verify that the user cannot login with Empty Username', { tags: ['@auth'] }, () => {
 
             AuthPage.getCredential(standardUser).then(({ username, password }) => {
                 AuthPage.typePasswordField(password);
@@ -87,7 +87,7 @@ describe('Login Validations', () => {
             });
         });
 
-        it('Verify that the user cannot login with Empty Password', function() {
+        it('Verify that the user cannot login with Empty Password', { tags: ['@auth'] }, () => {
 
             AuthPage.getCredential(standardUser).then(({ username, password }) => {
                 AuthPage.typeUsernameField(username);
@@ -97,7 +97,7 @@ describe('Login Validations', () => {
             });
         });
 
-        it('Verify that the user cannot login with both Username and Password Empty', function() {
+        it('Verify that the user cannot login with both Username and Password Empty', { tags: ['@smoke', '@auth'] }, () => {
 
             AuthPage.clickSignInButton();
 
@@ -105,7 +105,7 @@ describe('Login Validations', () => {
             AuthPage.verifyInvalidField('password');
         });
 
-        it('Verify that the user cannot login with Invalid Username', function() {
+        it('Verify that the user cannot login with Invalid Username', { tags: ['@smoke', '@auth'] }, () => {
 
             const invalidUsername = 'invalidUser';
 
@@ -118,7 +118,7 @@ describe('Login Validations', () => {
             });
         });
 
-        it('Verify that the user cannot login with Invalid Password', function() {
+        it('Verify that the user cannot login with Invalid Password', { tags: ['@smoke', '@auth'] }, () => {
 
             const invalidPassword = 'invalidPass';
 
@@ -131,7 +131,7 @@ describe('Login Validations', () => {
             });
         });
 
-        it('Verify that the user cannot login with both Invalid Username and Password', function() {
+        it('Verify that the user cannot login with both Invalid Username and Password', { tags: ['@auth'] }, () => {
 
             const invalidUsername = 'invalidUser2';
             const invalidPassword = 'invalidPass3';
@@ -147,7 +147,7 @@ describe('Login Validations', () => {
 
     context('Log out Validations', () => {
 
-        it('Verify that the Standard user can Log Out successfully', function() {
+        it('Verify that the Standard user can Log Out successfully', { tags: ['@smoke', '@auth'] }, () => {
 
             AuthPage.getCredential(standardUser).then(({ username, password }) => {
                 AuthPage.typeUsernameField(username);
@@ -161,7 +161,7 @@ describe('Login Validations', () => {
             });
         });
 
-        it('Verify that the Admin user can Log Out successfully', function() {
+        it('Verify that the Admin user can Log Out successfully', { tags: ['@smoke', '@auth'] }, () => {
 
             AuthPage.getCredential(adminUser).then(({ username, password }) => {
                 AuthPage.typeUsernameField(username);
@@ -175,7 +175,7 @@ describe('Login Validations', () => {
             });
         });
 
-        it('Verify that the user cannot access the Log out Button before log in', function() {
+        it('Verify that the user cannot access the Log out Button before log in', { tags: ['@smoke', '@auth'] }, () => {
             HomePage.verifyLogoutButtonNotVisible();
         });
 

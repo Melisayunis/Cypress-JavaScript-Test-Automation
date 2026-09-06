@@ -1,4 +1,5 @@
 const { defineConfig } = require('cypress');
+const { plugin: cypressGrepPlugin } = require('@cypress/grep/plugin');
 
 module.exports = defineConfig({
     e2e: {
@@ -28,6 +29,9 @@ module.exports = defineConfig({
 
         env: {
             environment: 'qa',
+
+            grepFilterSpecs: true,
+            grepOmitFiltered: true
         },
 
         reporter: 'cypress-mochawesome-reporter',
@@ -42,6 +46,7 @@ module.exports = defineConfig({
         },
 
         setupNodeEvents(on, config) {
+            cypressGrepPlugin(config);
             require('cypress-mochawesome-reporter/plugin')(on);
 
             return config;
