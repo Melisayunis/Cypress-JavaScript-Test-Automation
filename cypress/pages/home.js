@@ -10,7 +10,7 @@ export class HomePage {
      */
     static visit() {
 
-        cy.visit('https://qademo.com');
+        cy.visit('/');
     }
 
     /**
@@ -21,7 +21,7 @@ export class HomePage {
      */
     static verifyHomeUrl() {
 
-        cy.url().should('include', 'https://qademo.com');
+        cy.url().should('include', cy.config('baseUrl'));
     }
 
 
