@@ -67,7 +67,7 @@ export class HomePage {
             .should('be.visible').should('exist')
             .click({ force: true });
 
-            // icon
+        // icon
     }
 
     /**

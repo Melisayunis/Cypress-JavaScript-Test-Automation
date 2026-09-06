@@ -19,7 +19,9 @@
 		"test": "cypress run --browser chrome",
 		"test:smoke": "cypress run --browser chrome --expose grepTags=\"@smoke\",grepFilterSpecs=true,grepOmitFiltered=true",
 		"test:regression": "cypress run --browser chrome",
-		"lint": "eslint cypress/**/*.js"
+		"lint": "eslint cypress/**/*.js",
+		"lint:fix": "eslint cypress/**/*.js --fix",
+		"quality": "npm run lint && npm test"
 	},
 	"repository": {
 		"type": "git",

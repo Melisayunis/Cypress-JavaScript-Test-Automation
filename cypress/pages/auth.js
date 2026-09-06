@@ -326,7 +326,7 @@ export class AuthPage {
                 const username = credentialText.trim().split(' / ')[0];
                 const password = credentialText.trim().split(' / ')[1];
                 return { username, password };
-            })
+            });
     }
 
     // #endregion

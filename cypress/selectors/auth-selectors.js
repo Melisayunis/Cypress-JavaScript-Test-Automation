@@ -46,7 +46,7 @@ export const AuthSelectors = {
     passwordIcon: 'svg.lucide-lock',
     loginIcon: 'svg.lucide-log-in',
     infoIcon: '.mb-3 > svg.lucide-info',
-    errorIcon: 'svg.lucide-circle-alert',
+    errorIcon: 'svg.lucide-circle-alert'
 
     // #endregion
 
