@@ -23,9 +23,9 @@ on:
           - smoke
           - regression
 
-  concurrency:
-    group: cypress-${{ github.workflow }}-${{ github.ref }}
-    cancel-in-progress: true
+concurrency:
+  group: cypress-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   smoke-tests:
