@@ -13,15 +13,15 @@ on:
     - cron: '0 13 * * 1'
 
   workflow_dispatch:
-  inputs:
-    suite:
-      description: 'Test suite to execute'
-      required: true
-      default: 'smoke'
-      type: choice
-      options:
-        - smoke
-        - regression
+    inputs:
+      suite:
+        description: 'Test suite to execute'
+        required: true
+        default: 'smoke'
+        type: choice
+        options:
+          - smoke
+          - regression
 
 jobs:
   smoke-tests:
