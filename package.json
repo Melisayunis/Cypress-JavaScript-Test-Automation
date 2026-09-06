@@ -16,7 +16,8 @@
 		"cy:run": "cypress run --browser chrome",
 		"test": "cypress run --browser chrome",
 		"test:smoke": "cypress run --browser chrome --expose grepTags=\"@smoke\",grepFilterSpecs=true,grepOmitFiltered=true",
-		"test:regression": "cypress run --browser chrome"
+		"test:regression": "cypress run --browser chrome",
+		"lint": "eslint cypress/**/*.js"
 	},
 	"repository": {
 		"type": "git",
