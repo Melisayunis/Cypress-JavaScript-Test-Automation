@@ -1,7 +1,4 @@
 name: Cypress Tests
-uses: cypress-io/github-action@v6
-with:
-  browser: chrome
 
 on:
   push:
