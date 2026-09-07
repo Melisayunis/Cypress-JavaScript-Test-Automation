@@ -39,6 +39,7 @@ describe('Login Validations', () => {
                 AuthPage.clickSignInButton();
                 CatalogPage.verifyUrl();
                 HomePage.verifyUserNameNavbar(username);
+                HomePage.verifyAdminButtonVisible();
             });
         });
 
@@ -59,6 +60,7 @@ describe('Login Validations', () => {
                 AuthPage.clickSignInButton();
                 CatalogPage.verifyUrl();
                 HomePage.verifyUserNameNavbar(username);
+                HomePage.verifyAdminButtonVisible();
             });
         });
 
@@ -169,6 +171,7 @@ describe('Login Validations', () => {
                 AuthPage.clickSignInButton();
                 CatalogPage.verifyUrl();
                 HomePage.verifyUserNameNavbar(username);
+                HomePage.verifyAdminButtonVisible();
 
                 HomePage.clickLogoutButton();
                 HomePage.verifyHomeUrl();

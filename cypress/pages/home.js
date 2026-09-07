@@ -290,6 +290,19 @@ export class HomePage {
     }
 
     /**
+     * Verify that the admin button is visible in the navbar.
+     *
+     * @static
+     * @memberof HomePage
+     */
+    static verifyAdminButtonVisible() {
+
+        cy.get(HomeSelectors.navbarGeneral, { timeout: 10000 })
+            .find(HomeSelectors.navbarAdmin)
+            .should('be.visible').should('exist');
+    }
+
+    /**
      * Verify that all static elements on the Home page are displayed correctly.
      *
      * @static
