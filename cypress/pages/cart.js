@@ -1,26 +1,15 @@
 export class CartPage {
+    // #region
 
-    // #region 
-
-    static verifyUrl() {
-
-    }
-
-
+    static verifyUrl() {}
 
     // #endregion
 
-    // #region 
-
-
+    // #region
 
     // #endregion
 
-    // #region 
-
-    
+    // #region
 
     // #endregion
-
-
 }

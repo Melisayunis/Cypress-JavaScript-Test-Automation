@@ -1,6 +1,5 @@
 import { AuthPage, HomePage, CatalogPage } from '../pages';
 
-
 describe('Login Validations', () => {
 
     const standardUser = 'standard';
@@ -158,6 +157,7 @@ describe('Login Validations', () => {
 
                 HomePage.clickLogoutButton();
                 HomePage.verifyHomeUrl();
+                HomePage.verifyHomeStaticElements(false);
             });
         });
 
@@ -172,6 +172,7 @@ describe('Login Validations', () => {
 
                 HomePage.clickLogoutButton();
                 HomePage.verifyHomeUrl();
+                HomePage.verifyHomeStaticElements(false);
             });
         });
 
@@ -179,6 +180,83 @@ describe('Login Validations', () => {
             HomePage.verifyLogoutButtonNotVisible();
         });
 
+    });
+
+});
+
+describe('Navigation Validations', () => {
+
+    afterEach(() => {
+        cy.clearCookies();
+        cy.clearLocalStorage();
+    });
+
+    it('Verify that the user can navigate to the Sign In page from the different Home page sections', { tags: ['@smoke', '@auth'] }, () => {
+
+        // Navigate to the Sign In page from Navbar
+        HomePage.visit();
+        HomePage.clickSignInButtonNavbar();
+        AuthPage.verifyAuthUrl();
+        AuthPage.verifyAllStaticElements();
+
+        // Navigate to the Sign In page from Home section
+        HomePage.visit();
+        HomePage.clickSignInButtonHome();
+        AuthPage.verifyAuthUrl();
+        AuthPage.verifyAllStaticElements();
+
+        // Navigate to the Sign In page from Footer section
+        HomePage.visit();
+        HomePage.clickSignInButtonFooter();
+        AuthPage.verifyAuthUrl();
+        AuthPage.verifyAllStaticElements();
+
+        // Navigate to the Sign In page from Card section
+        HomePage.visit();
+        HomePage.clickSignInButtonCard();
+        AuthPage.verifyAuthUrl();
+        AuthPage.verifyAllStaticElements();
+    });
+
+    it('Verify that the user can navigate to the Home page from the Sign in with Back button', { tags: ['@auth'] }, () => {
+
+        HomePage.visit();
+        HomePage.clickSignInButtonNavbar();
+        AuthPage.verifyAuthUrl();
+        AuthPage.verifyAllStaticElements();
+        AuthPage.clickBackButton();
+        HomePage.verifyHomeUrl();
+        HomePage.verifyHomeStaticElements();
+    });
+
+    it('Verify that the user can navigate to the Home page from the Sign in with different QA logo buttons', { tags: ['@smoke', '@auth'] }, () => {
+
+        // Navigate to the Sign In page from the Auth page QA logo button
+        HomePage.visit();
+        HomePage.clickSignInButtonNavbar();
+        AuthPage.verifyAuthUrl();
+        AuthPage.verifyAllStaticElements();
+        AuthPage.clickQAButton();
+        HomePage.verifyHomeUrl();
+        HomePage.verifyHomeStaticElements();
+
+        // Navigate to the Sign In page from the Navbar QA logo button
+        HomePage.visit();
+        HomePage.clickSignInButtonNavbar();
+        AuthPage.verifyAuthUrl();
+        AuthPage.verifyAllStaticElements();
+        HomePage.clickQaLogoNavbarButton();
+        HomePage.verifyHomeUrl();
+        HomePage.verifyHomeStaticElements();
+
+        // Navigate to the Sign In page from the Footer QA logo button
+        HomePage.visit();
+        HomePage.clickSignInButtonNavbar();
+        AuthPage.verifyAuthUrl();
+        AuthPage.verifyAllStaticElements();
+        HomePage.clickQaLogoFooterButton();
+        HomePage.verifyHomeUrl();
+        HomePage.verifyHomeStaticElements();
     });
 
 });

@@ -38,7 +38,6 @@ Current and planned test areas include:
 - Checkout flows
 - Negative validations
 - UI state validation
-- API-assisted setup where applicable
 
 ## Test Strategy
 

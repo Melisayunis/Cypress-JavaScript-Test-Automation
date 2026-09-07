@@ -3,3 +3,4 @@ export { CartPage } from './cart';
 export { CatalogPage } from './catalog';
 export { FooterPage } from './footer';
 export { HomePage } from './home';
+export { AdminPage } from './admin';
